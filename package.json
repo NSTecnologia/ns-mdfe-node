@@ -1,6 +1,6 @@
 {
   "name": "ns-mdfe-node",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Biblioteca em Node.js para emissão de MDFe em comunicação com a API da NS Tecnologia",
   "main": "index.js",
   "scripts": {
