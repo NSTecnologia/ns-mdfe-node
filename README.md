@@ -1,4 +1,5 @@
-ns-mdfe-node
+# ns-mdfe-node
+
 Esta biblioteca possibilita a comunicação e o consumo da solução API para MDFe da NS Tecnologia.
 
 Para implementar esta biblioteca em seu projeto, você pode:
@@ -6,9 +7,11 @@ Para implementar esta biblioteca em seu projeto, você pode:
 Realizar a instalação do pacote através do npm:
 
 npm install ns-mdfe-node
-Realizar o download da biblioteca pelo GitHub e adicionar a pasta "ns-modules" em seu projeto.
 
-Exemplos de uso do pacote
+2. Realizar o download da biblioteca pelo [GitHub](https://github.com/NSTecnologia/ns-mdfe-node/archive/refs/heads/main.zip) e adicionar a pasta "ns-modules" em seu projeto.
+
+# Exemplos de uso do pacote
+
 Para que a comunicação com a API possa ser feita, é necessário informar o seu Token no cabeçalho das requisições.
 
 Para isso, crie um arquivo chamado configParceiro.js, e nele adicione:
@@ -19,7 +22,8 @@ Para isso, crie um arquivo chamado configParceiro.js, e nele adicione:
    module.exports = {token, CNPJ}
 Dessa forma, o pacote conseguirá importar as suas configurações, onde você estará informando o token da software house e o cnpj do emitente.
 
-Emissão
+## Emissão
+
 Para realizarmos a emissão de um MDFe, vamos utilizar os seguintes métodos.
 
 Primeiramente, vamos fazer referencia da classe emitirSincrono, para utilizarmos o método emitirMDFeSincrono
@@ -156,8 +160,9 @@ else {
 return respostaSincrona
 }
 
-Eventos
-Cancelar MDFe
+## Eventos
+
+### Cancelar MDFe
 Para realizarmos um cancelamento de um MDFe, devemos gerar o objeto do corpo da requisição e depois, fazer a chamada do método. Veja um exemplo:
 
 	const cancelarMDFe = require('./node_modules/ns-mdfe-node/ns_modules/mdfe_module/eventos/cancelamento')
@@ -179,7 +184,7 @@ requisicaoCancelamento = Objeto contendo as informações do corpo da requisiç�
 "XP" = tpDown = tipo de download, indicando quais os tipos de arquivos serão obtidos no download do evento de cancelamento;
 "./docs/mdfe/Eventos" = diretório onde serão salvos os arquivos obtidos no download do evento de cancelamento;
 
-Inutilização de numeração da MDFe
+### Encerramento de MDFe
 
 Para emitirmos um encerramento de MDFe, devemos gerar o objeto do corpo da requisição, utilizando a classe encerramentoMDFe.Body, e utilizar o método encerramentoMDFe.sendPostRequest, da seguinte forma:
 
@@ -205,24 +210,24 @@ requisicaoEncerramento = Objeto contendo as informações do corpo da requisiç�
 "XP" = tpDown = tipo de download, indicando quais os tipos de arquivos serão obtidos no download do evento de inutilização;
 @"./docs/mdfe/Eventos" = diretório onde serão salvos os arquivos obtidos no download do evento de inutilização;
 
-Utilitários
+## Utilitários
 
 Ainda com esta biblioteca, é possivel acessar método utilitários da API de MDFe. Veja exemplos:
 
-Consulta de cadastro de contribuinte
-   const consultarCadastro = require('./node_modules/ns-MDFe-node/ns_modules/cte_module/util/consultaCadastro')
-const util = require('./node_modules/ns-cte-node/ns_modules/api_module/util')
+### Consulta de cadastro de contribuinte
+	const consultarCadastro = require('./node_modules/ns-MDFe-node/ns_modules/cte_module/util/consultaCadastro')
+	const util = require('./node_modules/ns-cte-node/ns_modules/api_module/util')
 
-let corpo = new consultarCadastro.Body(
-"07364617000135",
-"RS",
-"0170108708",
-"07364617000135"
-)
+	let corpo = new consultarCadastro.Body(
+	"07364617000135",
+	"RS",
+	"0170108708",
+	"07364617000135"
+	)
 
-consultarCadastro.sendPostRequest(corpo, "X", "./docs/cte/Eventos").then(getResponse => { console.log(getResponse) })
+	consultarCadastro.sendPostRequest(corpo, "X", "./docs/cte/Eventos").then(getResponse => { console.log(getResponse) })
 
-Consultar situação de MDFe
+### Consultar situação de MDFe
 
    const consultaSituacaoMDFe = require('ns-mdfe-node/ns_modules/mdfe_module/util/consultarSituacao')
 
@@ -233,8 +238,8 @@ Consultar situação de MDFe
 )
 
 	consultaSituacaoMDFe.sendPostRequest(corpo, "J", "./docs/mdfe/Eventos").then(getResponse => { console.log(getResponse) })
-	
-Agendamento de Envio de E-Mail de MDFe
+        
+### Agendamento de Envio de E-Mail de MDFe
    const enviarEmail = require('./node_modules/ns-cte-node/ns_modules/cte_module/util/envioEmail')
 
    let corpo = new enviarEmail.Body(
@@ -247,8 +252,8 @@ Agendamento de Envio de E-Mail de MDFe
    )
 
    enviarEmail.sendPostRequest(corpo, "J", "./docs/mdfe/Eventos").then(getResponse => { console.log(getResponse) })
-   
-Listagem de nsNRec's vinculados à um MDFe
+
+### Listagem de nsNRec's vinculados à um MDFe
    const listarNSNRec = require('./node_modules/ns-mdfe-node/ns_modules/mdfe_module/util/listarNSNRec')
 
    let corpo = new listarNSNRec.Body(
@@ -256,13 +261,16 @@ Listagem de nsNRec's vinculados à um MDFe
    )
 
    listarNSNRec.sendPostRequest(corpo, "J", "./docs/mdfe/Eventos").then(getResponse => { console.log(getResponse) })
-   
-Gerar prévia do MDFe
+        
+### Gerar prévia do MDFe
 
 	const nsAPI = require('./node_modules/ns-mdfe-node/ns_modules/mdfe_module/util/previaMDFe')
 	const mdfeJSON = require('./LayoutMDFe.json')
 
 	previa = nsAPI.sendPostRequest(mdfeJSON).then(getResponse => { console.log(getResponse) })
 
-Informações Adicionais
-Para saber mais sobre o projeto CTe API da NS Tecnologia, consulte a documentação
+### Informações Adicionais
+
+Para saber mais sobre o projeto MDFe API da NS Tecnologia, consulte a [documentação](https://docsnstecnologia.wpcomstaging.com/docs/ns-mdfe/)
+
+
