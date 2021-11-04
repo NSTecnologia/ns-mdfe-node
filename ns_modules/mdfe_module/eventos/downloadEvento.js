@@ -1,9 +1,9 @@
-const nsAPI = require('../commons/nsAPI')
-const util = require('../commons/util')
+const nsAPI = require('../../api_module/nsAPI')
+const util = require('../../api_module/util')
 
 const url = "https://mdfe.ns.eti.br/mdfe/get/event"
 
-class body {
+class Body {
     constructor(chMDFe, tpAmb, tpDown, tpEvento, nSeqEvento) {
         this.chMDFe = chMDFe;
         this.tpAmb = tpAmb;
@@ -13,7 +13,7 @@ class body {
     }
 }
 
-class response {
+class Response {
     constructor({ status, motivo, retEvento, erro, xml, pdf, json }) {
         this.status = status;
         this.motivo = motivo;
@@ -27,7 +27,7 @@ class response {
 
 async function sendPostRequest(conteudo, caminhoSalvar) {
 
-    let responseAPI = new response(await nsAPI.PostRequest(url, conteudo))
+    let responseAPI = new Response(await nsAPI.PostRequest(url, conteudo))
 
     var idEvento = ""
 
@@ -46,20 +46,20 @@ async function sendPostRequest(conteudo, caminhoSalvar) {
     }
 
     if (responseAPI.json != null) {
-        util.salvarArquivo(caminhoSalvar, idEvento + responseAPI.retEvento.chCTe + conteudo.nSeqEvento, "-procEven.json", responseAPI.json)
+        util.salvarArquivo(caminhoSalvar, idEvento + responseAPI.retEvento.chMDFe + conteudo.nSeqEvento, "-procEven.json", responseAPI.json)
     }
 
     if (responseAPI.pdf != null) {
         let data = responseAPI.pdf;
         let buff = Buffer.from(data, 'base64');
-        util.salvarArquivo(caminhoSalvar, idEvento + responseAPI.retEvento.chCTe + conteudo.nSeqEvento, "-procEven.pdf", buff)
+        util.salvarArquivo(caminhoSalvar, idEvento + responseAPI.retEvento.chMDFe + conteudo.nSeqEvento, "-procEven.pdf", buff)
     }
 
     if (responseAPI.xml != null) {
-        util.salvarArquivo(caminhoSalvar, idEvento + responseAPI.retEvento.chCTe + conteudo.nSeqEvento, "-procEven.xml", responseAPI.xml)
+        util.salvarArquivo(caminhoSalvar, idEvento + responseAPI.retEvento.chMDFe + conteudo.nSeqEvento, "-procEven.xml", responseAPI.xml)
     }
 
     return responseAPI
 }
 
-module.exports = { body, sendPostRequest }
+module.exports = { Body, sendPostRequest }

@@ -1,10 +1,10 @@
-const nsAPI = require('../commons/nsAPI')
+const nsAPI = require('../../api_module/nsAPI')
 const downloadEvento = require('./downloadEvento')
-const util = require('../commons/util')
+const util = require('../../api_module/util')
 
 const url = "https://mdfe.ns.eti.br/mdfe/cancel"
 
-class body {
+class Body {
     constructor(chMDFe, tpAmb, dhEvento, nProt, xJust) {
         this.chMDFe = chMDFe;
         this.tpAmb = tpAmb;
@@ -49,4 +49,4 @@ async function sendPostRequest(conteudo, tpDown, caminhoSalvar) {
     return responseAPI
 }
 
-module.exports = { body, sendPostRequest }
+module.exports = { Body, sendPostRequest }

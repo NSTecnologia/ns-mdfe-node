@@ -2,7 +2,7 @@ const nsAPI = require('../../api_module/nsAPI')
 
 const url = "https://mdfe.ns.eti.br/util/consnotclosed"
 
-class body {
+class Body {
     constructor(tpAmb, cUF, CNPJ) {
         this.tpAmb = tpAmb;
         this.cUF = cUF;
@@ -10,7 +10,7 @@ class body {
     }
 }
 
-class response {
+class Response {
     constructor({ status, motivo, retConsMDFeNaoEnc, erros }) {
         this.status = status;
         this.motivo = motivo;
@@ -20,8 +20,8 @@ class response {
 }
 
 async function sendPostRequest(conteudo) {
-    let responseAPI = new response(await nsAPI.PostRequest(url, conteudo))
+    let responseAPI = new Response(await nsAPI.PostRequest(url, conteudo))
     return responseAPI
 }
 
-module.exports = { body, sendPostRequest }
+module.exports = { Body, sendPostRequest }

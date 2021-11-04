@@ -1,8 +1,8 @@
-const nsAPI = require('../commons/nsAPI')
+const nsAPI = require('../../api_module/nsAPI')
 
 const url = "https://mdfe.ns.eti.br/util/enviaremail"
 
-class body {
+class Body {
     constructor(chMDFe, tpAmb, enviaEmailDoc, anexarPDF, anexarEvento, email) {
         this.chMDFe = chMDFe;
         this.tpAmb = tpAmb;
@@ -13,7 +13,7 @@ class body {
     }
 }
 
-class response {
+class Response {
     constructor({ status, motivo, erro }) {
         this.status = status;
         this.motivo = motivo;
@@ -22,8 +22,8 @@ class response {
 }
 
 async function sendPostRequest(conteudo) {
-    let responseAPI = new response(await nsAPI.PostRequest(url, conteudo))
+    let responseAPI = new Response(await nsAPI.PostRequest(url, conteudo))
     return responseAPI
 }
 
-module.exports = { body, sendPostRequest }
+module.exports = { Body, sendPostRequest }

@@ -1,7 +1,7 @@
 const nsAPI = require('../../api_module/nsAPI')
 const url = "https://mdfe.ns.eti.br/mdfe/stats"
 
-class body {
+class Body {
     constructor(licencaCnpj, chMDFe, tpAmb) {
         this.licencaCnpj = licencaCnpj;
         this.chMDFe = chMDFe;
@@ -9,7 +9,7 @@ class body {
     }
 }
 
-class response {
+class Response {
     constructor({ status, motivo, retConsSitNFe, erros }) {
         this.status = status;
         this.motivo = motivo;
@@ -19,8 +19,8 @@ class response {
 }
 
 async function sendPostRequest(conteudo) {
-    let responseAPI = new response(await nsAPI.PostRequest(url, conteudo))
+    let responseAPI = new Response(await nsAPI.PostRequest(url, conteudo))
     return responseAPI
 }
 
-module.exports = { body, sendPostRequest }
+module.exports = { Body, sendPostRequest }

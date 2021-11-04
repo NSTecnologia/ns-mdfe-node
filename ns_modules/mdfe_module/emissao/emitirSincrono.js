@@ -1,7 +1,7 @@
 const statusProcessamento = require('./statusProcessamento')
 const download = require('./download')
 const emitir = require('./emitir')
-const configParceiro = require('../../../configParceiro')
+const configParceiro = require('../../../../../configParceiro')
 
 class responseSincrono {
     constructor(statusEnvio, statusConsulta, statusDownload, cStat, motivo, xMotivo, nsNRec, chMDFe, nProt, xml, json, pdf, erros) {
@@ -89,7 +89,7 @@ async function emitirMDFeSincrono(conteudo, tpAmb, tpDown, caminhoSalvar) {
         }
     }
 
-    else if ((statusEnvio == -4) || (statusEnvio == -2)) {
+    else if ((emissaoResponse.status == -4) || (emissaoResponse.status == -2)) {
 
         respostaSincrona.motivo = emissaoResponse.motivo
 
@@ -102,7 +102,7 @@ async function emitirMDFeSincrono(conteudo, tpAmb, tpDown, caminhoSalvar) {
         }
     }
 
-    else if ((statusEnvio == -999) || (statusEnvio == -5)) {
+    else if ((emissaoResponse.status == -999) || (emissaoResponse.status == -5)) {
         respostaSincrona.motivo = emissaoResponse.motivo
     }
 
